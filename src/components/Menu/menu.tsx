@@ -45,15 +45,15 @@ export const Menu: React.FC<MenuProps> = (props) => {
     index: currentActive ? currentActive : '0',
     onSelect: handleClick,
     mode,
-    defaultOpenSubMenus, 
+    defaultOpenSubMenus,
   }
 
   const renderChildren = () => {
     return React.Children.map(children, (child, index) => {
-      //需要从child中拿到displayName属性的值
+      // 需要从child中拿到displayName属性的值
       const childElement = child as React.FunctionComponentElement<MenuItemProps>
       const { displayName } = childElement.type
-      if(displayName === 'MenuItem' || displayName === 'SubMenu') {
+      if (displayName === 'MenuItem' || displayName === 'SubMenu') {
         // 给每个子元素添加上index props
         return React.cloneElement(childElement, {
           index: index.toString()

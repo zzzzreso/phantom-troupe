@@ -1,20 +1,19 @@
 import React, { useRef, ChangeEvent, useState } from 'react'
 import axios from 'axios'
-import Button from '../Button/button'
 import UploadList from './uploadList'
 import Dragger from './dragger'
 
 type fileStatus = 'ready' | 'loading' | 'success' | 'error'
 //创建文件类型
 export interface UploadFile {
-  uid: string;
-  size: number;
-  name: string;
-  status?: fileStatus;
-  percent?: number;
-  raw?: File;
-  response?: any;
-  error?: any;
+  uid: string
+  size: number
+  name: string
+  status?: fileStatus
+  percent?: number
+  raw?: File
+  response?: any
+  error?: any
 }
 
 export interface UploadProps {
@@ -71,8 +70,8 @@ export const Upload: React.FC<UploadProps> = (props) => {
   } = props
   const inputRef = useRef<HTMLInputElement>(null)
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
-  //由于React使用Object.is来比较state,所以需要自己更新对象信息
-  //updateFile: 要更新的某个对象，updateObj：更新后的新属性组成的对象
+  // 由于React使用Object.is来比较state,所以需要自己更新对象信息
+  // updateFile: 要更新的某个对象，updateObj：更新后的新属性组成的对象
   const updateFileList = (updateFile: UploadFile, updateObj: Partial<UploadFile>) => {
     setFileList(preList => {
       return preList.map(file => {
@@ -89,25 +88,6 @@ export const Upload: React.FC<UploadProps> = (props) => {
     if (inputRef.current) {
       inputRef.current.click()
     }
-  }
-
-  // 上传之前可以先对文件进行检测
-  const upLoadFiles = (files: FileList) => {
-    let postFiles = Array.from(files)
-    postFiles.forEach(file => {
-      if (!beforeUpload) {
-        postFile(file)
-      } else {
-        const result = beforeUpload(file)
-        if (result && result instanceof Promise) {
-          result.then(data => {
-            postFile(data)
-          })
-        } else if (result !== false) {
-          postFile(file)
-        }
-      }
-    })
   }
 
   const postFile = (file: File) => {
@@ -180,7 +160,25 @@ export const Upload: React.FC<UploadProps> = (props) => {
       }
     })
   }
-  console.log(fileList)
+
+  // 上传之前可以先对文件进行检测
+  const upLoadFiles = (files: FileList) => {
+    let postFiles = Array.from(files)
+    postFiles.forEach(file => {
+      if (!beforeUpload) {
+        postFile(file)
+      } else {
+        const result = beforeUpload(file)
+        if (result && result instanceof Promise) {
+          result.then(data => {
+            postFile(data)
+          })
+        } else if (result !== false) {
+          postFile(file)
+        }
+      }
+    })
+  }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files

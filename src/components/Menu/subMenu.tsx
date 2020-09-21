@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import classNames from 'classnames'
 import Transition from '../Transition/transition'
 import { MenuContext } from './menu'
@@ -6,12 +6,12 @@ import { MenuItemProps } from './menuItem'
 import Icon from '../Icon/icon'
 
 export interface SubMenuProps {
-  index?: string;
-  className?: string;
-  title?: string;
+  index?: string
+  className?: string
+  title?: string
 }
 
-const SubMenu: React.FC<SubMenuProps> = ({ index, className, title, children }) => {
+const SubMenu: FC<SubMenuProps> = ({ index, className, title, children }) => {
   const context = useContext(MenuContext)
   // 检查数组，将默认为展开状态的submenu的drop设置为true
   const openSubMenus = context.defaultOpenSubMenus as Array<string>
@@ -80,8 +80,8 @@ const SubMenu: React.FC<SubMenuProps> = ({ index, className, title, children }) 
         animation='zoom-in-top'
       >
         <ul className={subMenuClasses}>
-        {childrenComponent}
-      </ul>
+          {childrenComponent}
+        </ul>
       </Transition>
     )
   }
@@ -98,4 +98,4 @@ const SubMenu: React.FC<SubMenuProps> = ({ index, className, title, children }) 
 }
 
 SubMenu.displayName = 'SubMenu'
-export default SubMenu
+export default SubMenu;

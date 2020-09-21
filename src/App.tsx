@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import Button from './components/Button/button'
@@ -6,9 +6,10 @@ import Icon from './components/Icon/icon'
 import Transition from './components/Transition/transition'
 import Input from './components/Input/input'
 import AutoComplete, { DataSourceType } from './components/AutoComplete/autoComplete'
-import axios from 'axios'
 import Upload, { UploadFile } from './components/Upload/upload'
 import Alert from './components/Alert/alert'
+import { Tabs } from './components/Tabs/tabs'
+import { TabItem } from './components/Tabs/tabsItem'
 
 library.add(fas)
 function App() {
@@ -32,31 +33,22 @@ function App() {
     id?: number;
     html_url?: string;
   }
-  const showOptions = (item: DataSourceType<githubUserProp>) => {
-    return (
-      <div>
-        <h2>Name: {item.value}</h2>
-        <p>id: {item.id}</p>
-        <p>url: {item.html_url}</p>
-      </div>
-    )
-  }
 
   const progress = (percent: number, file: File) => {
     console.log(percent)
   }
-  const test = (file: File) => {
-    if (file.size / 1024 > 50) {
-      alert('file too big')
-      return false
-    }
-    return true
-  }
-  // 可以修改上传文件的信息
-  const testPromise = (file: File) => {
-    const newFile = new File([file], 'new_file', { type: file.type })
-    return Promise.resolve(newFile)
-  }
+  // const test = (file: File) => {
+  //   if (file.size / 1024 > 50) {
+  //     alert('file too big')
+  //     return false
+  //   }
+  //   return true
+  // }
+  // // 可以修改上传文件的信息
+  // const testPromise = (file: File) => {
+  //   const newFile = new File([file], 'new_file', { type: file.type })
+  //   return Promise.resolve(newFile)
+  // }
   const files: UploadFile[] = [
     { uid: '10086', name: 'fsfs', size: 55555, status: 'loading', percent: 50 },
     { uid: '10086212', name: 'fsfs2', size: 55555, status: 'success', percent: 50 },
@@ -70,7 +62,6 @@ function App() {
         <AutoComplete
           fetchSuggestions={fetchNames}
           onSelect={console.log}
-        // renderOption={showOptions}
         ></AutoComplete>
         <Input
           onChange={() => console.log(3)}
@@ -78,7 +69,7 @@ function App() {
           size="lg"
           icon='arrow-right'
           prepend='prepend'
-          append='append' />
+        />
         <Button autoFocus onClick={(e) => { alert(3) }} className="fdfd">test</Button>
         <Button size='lg' btnType='primary' onClick={() => { setShow(!show) }}>Primary button</Button>
         <Transition
@@ -115,6 +106,17 @@ function App() {
         <Icon icon='upload' size='8x' />
         <p>上传文件</p>
       </Upload>
+      <Tabs onSelect={(index) => { console.log(index) }}>
+        <TabItem label='tab1'>
+          tab1
+        </TabItem>
+        <TabItem label='tab2'>
+          tab2
+        </TabItem>
+        <TabItem label='tab3'>
+          tab3
+        </TabItem>
+      </Tabs>
     </div >
   );
 }

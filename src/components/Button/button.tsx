@@ -27,7 +27,7 @@ export type ButtonProps = Partial<NativeButtonProps & AnchorProps>
  * ### 引用方法
  * 
  * ~~~js
- * import { Button } from 'imooc'
+ * import { Button } from 'phantom-troupe'
  * ~~~
  */
 export const Button: FC<ButtonProps> = (props) => {

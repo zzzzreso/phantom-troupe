@@ -23,4 +23,4 @@ export const Icon: FC<IconProps> = (props) => {
   )
 }
 
-export default Icon
+export default Icon;

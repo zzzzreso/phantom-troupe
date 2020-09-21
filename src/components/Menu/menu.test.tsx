@@ -113,5 +113,4 @@ describe('Menu component test', () => {
       expect(subMenuItem).not.toBeVisible()
     })
   })
-
 })

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { FC, useContext } from 'react'
 import classNames from 'classnames'
 import { MenuContext } from './menu'
 
@@ -9,7 +9,7 @@ export interface MenuItemProps {
   style?: React.CSSProperties;
 }
 
-const MenuItem: React.FC<MenuItemProps> = (props) => {
+const MenuItem: FC<MenuItemProps> = (props) => {
   //通过useContext获得MenuContext.Provider中传入value的对象
   const context = useContext(MenuContext)
   const { index, className, disabled, children, style } = props
@@ -39,4 +39,4 @@ MenuItem.defaultProps = {
   disabled: false
 }
 
-export default MenuItem
+export default MenuItem;
