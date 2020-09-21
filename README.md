@@ -14,3 +14,6 @@ import 'phantom-troupe/dist/index.css'
 // 引入组件
 import { Button } from 'phantom-troupe'
 ~~~
+
+## 🔗 链接
+[组件库](https://zzzzreso.github.io/phantom-troupe/storybook-static)
